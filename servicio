@@ -1,0 +1,27 @@
+import qi
+import sys
+
+class MyFooService:
+  def __init__(self, *args, **kwargs):
+    #Se define la señal 'onBang'
+    self.onBang = qi.Signal()
+
+  #Se define el método bang que disparará la seña onBang
+  def bang (self):
+    #Disparo de la señal con 42 como valor 
+    self.onBang(42)
+    print ("Servicio funcionando")
+
+#create an application
+app = qi.Application()
+app.start()
+
+#Creamos una instancia de MyFooService
+myfoo = MyFooService()
+
+s = app.session
+#Registramos nuestro servicio con el nombre "foo"
+id = s.registerService("foo", myfoo)
+
+#permitimos que la aplicación se ejecute
+app.run()
