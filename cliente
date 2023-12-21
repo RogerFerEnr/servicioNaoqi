@@ -1,0 +1,15 @@
+import qi
+import sys
+
+def onBangCb(i):
+  print ("bang: ", + i)
+
+app = qi.Application()
+app.start()
+s = app.session
+foo = s.service("foo")
+
+#Registramos un callback en 'onBang'
+foo.onBang.connect(onBangCb)
+#call bang
+foo.bang()
